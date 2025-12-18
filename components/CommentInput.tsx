@@ -1,4 +1,4 @@
-"use client";
+// components/CommentInput.tsx
 import { useState } from "react";
 
 export default function CommentInput({
@@ -9,34 +9,43 @@ export default function CommentInput({
   const [page, setPage] = useState("");
   const [text, setText] = useState("");
 
-  const handleSubmit = () => {
-    if (!text.trim()) return; // 내용이 없으면 중단
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault(); // 폼 제출 시 페이지 새로고침 방지
+    if (!text.trim()) return;
+
     onAdd(page, text);
-    setPage(""); // 입력 후 칸 비우기
+    setPage("");
     setText("");
   };
 
   return (
-    <footer className="p-4 flex gap-2 items-center border-t bg-white">
+    // 1. footer 대신 form을 사용하고 onSubmit을 연결합니다.
+    <form
+      onSubmit={handleSubmit}
+      className="p-4 flex gap-2 items-center border-t bg-white"
+    >
       <input
+        required // 2. 필수 입력값으로 설정
+        type="number"
         value={page}
         onChange={(e) => setPage(e.target.value)}
-        className="w-16 border p-2 text-sm text-center"
+        className="w-16 border p-2 text-sm text-center [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
         placeholder="P"
       />
+
       <input
+        required // 3. 내용도 없으면 말풍선이 뜹니다
+        type="text"
         value={text}
         onChange={(e) => setText(e.target.value)}
-        onKeyDown={(e) => e.key === "Enter" && handleSubmit()} // 엔터키 지원
         className="flex-1 border p-2 text-sm"
-        placeholder="기록을 남겨보세요..."
+        placeholder="코멘트를 남겨보세요..."
       />
-      <button
-        onClick={handleSubmit}
-        className="p-2 text-blue-500 hover:scale-110 transition"
-      >
+
+      {/* 4. button 타입을 submit으로 설정해야 브라우저 검증이 작동합니다. */}
+      <button type="submit" className="p-2 text-blue-500">
         ✈️
       </button>
-    </footer>
+    </form>
   );
 }

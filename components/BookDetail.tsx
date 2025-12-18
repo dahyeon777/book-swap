@@ -18,6 +18,11 @@ export default function BookDetail({ title }: { title: string }) {
     setComments([...comments, newComment]); // 기존 목록에 새 댓글 추가
   };
 
+  //삭제 함수
+  const deleteComment = (id: number) => {
+    setComments(comments.filter((comment) => comment.id !== id));
+  };
+
   return (
     <main className="flex-1 flex flex-col h-full">
       {/* 상단 정보 */}
@@ -32,7 +37,10 @@ export default function BookDetail({ title }: { title: string }) {
       </header>
 
       {/* 3. 리스트 컴포넌트에 댓글 데이터 전달 */}
-      <CommentList comments={comments} />
+      <CommentList
+        comments={[...comments].sort((a, b) => Number(a.page) - Number(b.page))}
+        onDelete={deleteComment}
+      />
 
       {/* 4. 입력 컴포넌트에 추가 함수 전달 */}
       <CommentInput onAdd={addComment} />
