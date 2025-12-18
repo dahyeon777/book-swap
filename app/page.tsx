@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <div className="flex h-screen w-full bg-white">
       <Sidebar />
-      <BookDetail />
+      <BookDetail title="임시 제목" />
     </div>
   );
 }
