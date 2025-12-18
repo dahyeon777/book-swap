@@ -1,4 +1,5 @@
 "use client";
+import backImg from "../public/img/4.png.jpg";
 
 interface Comment {
   id: number;
@@ -15,19 +16,23 @@ export default function CommentList({
   onDelete: (id: number) => void;
 }) {
   return (
-    <section className="flex-1 bg-[#e8f8fa] border-t border-b overflow-y-auto p-4 space-y-2">
+    <section
+      className="flex-1 border-t border-b overflow-y-auto p-4 space-y-2 bg-cover bg-center bg-no-repeat"
+      style={{ backgroundImage: `url(${backImg.src})` }}
+    >
       {comments.map((comment) => (
         <div
           key={comment.id}
-          className="bg-white/60 p-3 rounded shadow-sm flex justify-between items-center group"
+          className="bg-white/70 backdrop-blur-md border border-white/20 p-4 rounded-xl shadow-sm flex justify-between items-start group"
         >
-          <div className="flex gap-3 items-start">
-            <span className="text-blue-600 font-bold text-sm min-w-[30px]">
+          <div className="flex gap-4 items-start">
+            <span className="text-blue-600 font-extrabold text-base min-w-[45px] pt-0.5">
               {comment.page}p
             </span>
-            <span className="text-gray-800 text-sm">{comment.text}</span>
+            <span className="text-gray-900 text-base font-medium leading-relaxed whitespace-pre-wrap">
+              {comment.text}
+            </span>
           </div>
-
           {/* 2. 삭제 버튼 추가 */}
           <button
             onClick={() => onDelete(comment.id)}

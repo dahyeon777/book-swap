@@ -1,5 +1,6 @@
 // components/CommentInput.tsx
 import { useState } from "react";
+import sendIcon from "../public/img/icon/sendIcon.png";
 
 export default function CommentInput({
   onAdd,
@@ -43,9 +44,14 @@ export default function CommentInput({
       />
 
       {/* 4. button 타입을 submit으로 설정해야 브라우저 검증이 작동합니다. */}
-      <button type="submit" className="p-2 text-blue-500">
-        ✈️
-      </button>
+
+      <button
+        type="submit"
+        className="p-2 bg-cover bg-center bg-no-repeat w-12 h-12 
+             transition-transform duration-75 
+             active:translate-y-0.5"
+        style={{ backgroundImage: `url(${sendIcon.src})` }}
+      ></button>
     </form>
   );
 }
