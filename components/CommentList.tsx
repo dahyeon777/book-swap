@@ -1,5 +1,5 @@
 "use client";
-import backImg from "../public/img/4.png.jpg";
+import backImg from "../public/img/6.png.jpg";
 
 interface Comment {
   id: number;

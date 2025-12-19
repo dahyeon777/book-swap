@@ -41,7 +41,7 @@ export default function Sidebar({ onSelectBook }: SidebarProps) {
   };
 
   return (
-    <aside className="w-100 bg-[#ededed] flex flex-col border-r h-full relative">
+    <aside className="w-80 bg-[#ededed] flex flex-col border-r h-full relative">
       <SidebarSearch
         onSearch={handleSearch}
         onFocus={() => setIsFocused(true)}

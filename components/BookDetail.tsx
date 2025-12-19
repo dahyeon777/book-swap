@@ -10,7 +10,7 @@ interface BookDetailProps {
 
 export default function BookDetail({ book }: BookDetailProps) {
   const [comments, setComments] = useState([
-    { id: 1, page: "23", text: "이 문장 진짜 개쩔어 읽어봐" },
+    { id: 1, page: "1", text: "코멘트를 입력하세요..." },
   ]);
 
   const addComment = (page: string, text: string) => {
@@ -40,7 +40,7 @@ export default function BookDetail({ book }: BookDetailProps) {
       {/* 상단 정보 */}
       <header className="p-8 flex gap-6">
         {/* 실제 책 표지 이미지 적용 */}
-        <div className="w-32 h-44 bg-[#d9d9d9] flex items-center justify-center overflow-hidden shadow-md">
+        <div className="w-38 h-52 bg-[#d9d9d9] flex items-center justify-center overflow-hidden shadow-md">
           {book.thumbnail ? (
             <img
               src={book.thumbnail}
