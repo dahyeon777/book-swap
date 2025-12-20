@@ -130,7 +130,7 @@ export default function BookDetail({ book }: BookDetailProps) {
         </div>
 
         <div className="flex-1 min-w-0">
-          <h1 className="text-2xl font-bold truncate">{book.title}</h1>
+          <h1 className="text-xl font-bold truncate">{book.title}</h1>
           <p className="text-gray-500 mt-1">
             {book.authors?.join(", ")} | 카카오 도서 정보
           </p>
