@@ -30,7 +30,7 @@ export default function BookDetail({ book }: BookDetailProps) {
       if (user && book) {
         const userRef = doc(db, "users", user.uid);
         const userDoc = await getDoc(userRef);
-        
+
         if (userDoc.exists()) {
           const allComments = userDoc.data().comments || {};
           // 현재 보고 있는 책의 ISBN을 키로 사용하여 코멘트 배열 가져오기
@@ -69,11 +69,15 @@ export default function BookDetail({ book }: BookDetailProps) {
       });
     } catch (error) {
       // 문서가 없거나 필드가 없을 경우 초기 세팅
-      await setDoc(userRef, {
-        comments: {
-          [book.isbn]: [newComment],
+      await setDoc(
+        userRef,
+        {
+          comments: {
+            [book.isbn]: [newComment],
+          },
         },
-      }, { merge: true });
+        { merge: true }
+      );
     }
   };
 
@@ -92,38 +96,58 @@ export default function BookDetail({ book }: BookDetailProps) {
 
   if (!book) {
     return (
-      <main className="flex-1 flex items-center justify-center text-gray-400">
-        사이드바에서 책을 검색하고 선택해주세요.
+      <main className="flex-1 flex flex-col h-full overflow-hidden bg-white">
+        <div
+          className="flex-1 flex items-center justify-center bg-cover bg-center bg-no-repeat"
+          /* CommentList와 동일한 배경 이미지를 적용합니다 */
+          style={{ backgroundImage: "url('/img/6.png.jpg')" }}
+        >
+          {/* 글자가 잘 보이도록 반투명한 박스로 감싸줬어요 */}
+          <div className="bg-white/60 backdrop-blur-md px-8 py-4 rounded-2xl shadow-xl border border-white/30">
+            <p className="text-gray-800 font-semibold text-lg">
+              📚 왼쪽 사이드바에서 책을 검색해 추가해주세요!
+            </p>
+          </div>
+        </div>
       </main>
     );
   }
 
+  // [수정 포인트] 책을 선택했을 때 보여주는 메인 화면
   return (
-    <main className="flex-1 flex flex-col h-full bg-white">
-      <header className="p-8 flex gap-6 border-b">
-        <div className="w-38 h-52 bg-[#d9d9d9] flex items-center justify-center overflow-hidden shadow-md rounded">
+    <main className="flex-1 flex flex-col h-full bg-white overflow-hidden">
+      <header className="p-8 flex gap-6 border-b shrink-0 bg-white">
+        <div className="w-38 h-52 bg-[#d9d9d9] flex items-center justify-center overflow-hidden shadow-md rounded shrink-0">
           {book.thumbnail ? (
-            <img src={book.thumbnail} alt={book.title} className="w-full h-full object-cover" />
+            <img
+              src={book.thumbnail}
+              alt={book.title}
+              className="w-full h-full object-cover"
+            />
           ) : (
             <span className="text-gray-500">사진 없음</span>
           )}
         </div>
 
-        <div className="flex-1">
-          <h1 className="text-2xl font-bold">{book.title}</h1>
+        <div className="flex-1 min-w-0">
+          <h1 className="text-2xl font-bold truncate">{book.title}</h1>
           <p className="text-gray-500 mt-1">
             {book.authors?.join(", ")} | 카카오 도서 정보
           </p>
         </div>
       </header>
 
-      {/* 페이지 순으로 정렬하여 보여주기 */}
+      {/* CommentList가 있는 이 영역은 CommentList 내부에 
+         이미 배경 이미지가 설정되어 있으므로 그대로 둡니다.
+      */}
       <CommentList
         comments={[...comments].sort((a, b) => Number(a.page) - Number(b.page))}
         onDelete={deleteComment}
       />
 
-      <CommentInput onAdd={addComment} />
+      <footer className="shrink-0">
+        <CommentInput onAdd={addComment} />
+      </footer>
     </main>
   );
 }

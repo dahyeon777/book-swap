@@ -3,17 +3,22 @@
 import Sidebar from "@/components/Sidebar";
 import BookDetail from "../components/BookDetail";
 import { useState } from "react";
+import Header from "@/components/Header";
 
 export default function Home() {
   const [selectedBook, setSelectedBook] = useState<any>(null);
 
   return (
-    <div className="flex h-screen">
-      {/* 함수 이름을 Sidebar 내부 props와 맞췄습니다. */}
-      <Sidebar onSelectBookForMain={setSelectedBook} />
+    <div className="flex flex-col h-screen overflow-hidden">
+      <div className="shrink-0 border-b">
+        <Header />
+      </div>
 
-      {/* 메인 영역 */}
-      <BookDetail book={selectedBook} />
+      <div className="flex flex-1 overflow-hidden">
+        <Sidebar onSelectBookForMain={setSelectedBook} />
+
+        <BookDetail book={selectedBook} />
+      </div>
     </div>
   );
 }

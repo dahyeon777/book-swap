@@ -1,4 +1,4 @@
-import Header from "@/components/Header"; // 만든 Header 컴포넌트 임포트
+// 만든 Header 컴포넌트 임포트
 import "./globals.css";
 
 export default function RootLayout({
@@ -9,7 +9,7 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className="antialiased">
-        <Header />
+        
         <main>{children}</main>
       </body>
     </html>
