@@ -105,7 +105,7 @@ export default function BookDetail({ book }: BookDetailProps) {
           {/* 글자가 잘 보이도록 반투명한 박스로 감싸줬어요 */}
           <div className="bg-white/60 backdrop-blur-md px-8 py-4 rounded-2xl shadow-xl border border-white/30">
             <p className="text-gray-800 font-semibold text-lg">
-              📚 왼쪽 사이드바에서 책을 검색해 추가해주세요!
+              📚 왼쪽 사이드바에서 책을 추가해주세요!
             </p>
           </div>
         </div>
@@ -117,7 +117,7 @@ export default function BookDetail({ book }: BookDetailProps) {
   return (
     <main className="flex-1 flex flex-col h-full bg-white overflow-hidden">
       <header className="p-8 flex gap-6 border-b shrink-0 bg-white">
-        <div className="w-38 h-52 bg-[#d9d9d9] flex items-center justify-center overflow-hidden shadow-md rounded shrink-0">
+        <div className="w-32 h-46 bg-[#d9d9d9] flex items-center justify-center overflow-hidden shadow-md rounded shrink-0">
           {book.thumbnail ? (
             <img
               src={book.thumbnail}
