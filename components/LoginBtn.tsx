@@ -25,9 +25,10 @@ export default function UserInfo() {
 
   return (
     <div className="flex items-center gap-3">
-      {/* 유저 닉네임 또는 이메일 앞부분 표시 */}
+      {/* user.email이 있으면 이메일 앞부분을 보여주고, 없으면 displayName을 보여줍니다. */}
       <span className="text-sm font-semibold text-gray-700">
-        {user.displayName || user.email?.split("@")[0]}님 환영합니다!
+        {user.email ? user.email.split("@")[0] : user.displayName || "사용자"}님
+        환영합니다!
       </span>
 
       {/* 확인 창을 거치는 로그아웃 버튼 */}

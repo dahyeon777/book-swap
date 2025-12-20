@@ -4,8 +4,7 @@ export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const query = searchParams.get("query");
 
-  // 🔴 디버깅용: API 키 확인 (실제 키는 보이지 않게)
-  // 임시로 직접 넣기 (테스트용)
+
   const apiKey =
     process.env.KAKAO_REST_API_KEY || "c94c3139fd8cfd6a4844b387a5d2bab0";
   //   const apiKey = process.env.KAKAO_REST_API_KEY;
