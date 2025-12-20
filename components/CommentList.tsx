@@ -7,7 +7,6 @@ interface Comment {
   text: string;
 }
 
-// 1. onDelete의 타입을 정의해줍니다.
 export default function CommentList({
   comments,
   onDelete,
@@ -17,31 +16,36 @@ export default function CommentList({
 }) {
   return (
     <section
-      className="flex-1 border-t border-b overflow-y-auto p-4 space-y-2 bg-cover bg-center bg-no-repeat"
+      className="flex-1 border-t border-b overflow-y-auto bg-cover bg-center bg-no-repeat bg-fixed"
       style={{ backgroundImage: `url(${backImg.src})` }}
     >
-      {comments.map((comment) => (
-        <div
-          key={comment.id}
-          className="bg-white/70 backdrop-blur-md border border-white/20 p-4 rounded-xl shadow-sm flex justify-between items-start group"
-        >
-          <div className="flex gap-4 items-start">
-            <span className="text-blue-600 font-extrabold text-base min-w-[45px] pt-0.5">
-              {comment.page}p
-            </span>
-            <span className="text-gray-900 text-base font-medium leading-relaxed whitespace-pre-wrap">
-              {comment.text}
-            </span>
-          </div>
-          {/* 2. 삭제 버튼 추가 */}
-          <button
-            onClick={() => onDelete(comment.id)}
-            className="text-xs text-gray-400 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity px-2"
+      {/* max-w-none으로 폭 제한을 풀고 px-6으로 양옆 마진을 넉넉히 줍니다 */}
+      <div className="w-full max-w-[1400px] mx-auto space-y-3 px-6 py-8">
+        {comments.map((comment) => (
+          <div
+            key={comment.id}
+            className="bg-white/60 backdrop-blur-sm border border-white/40 px-6 py-4 rounded-lg shadow-sm flex justify-between items-start group transition-all hover:bg-white/80"
           >
-            삭제
-          </button>
-        </div>
-      ))}
+            <div className="flex gap-5 items-start flex-1">
+              {/* 페이지 번호 디자인을 조금 더 시원하게 키웠습니다 */}
+              <span className="text-blue-500 font-bold text-xs bg-blue-50 px-3 py-1 rounded-full min-w-[48px] text-center mt-1 shadow-sm border border-blue-100/50">
+                {comment.page}p
+              </span>
+              {/* flex-1로 텍스트가 가로 공간을 넓게 쓰게 합니다 */}
+              <span className="text-gray-800 text-[15px] font-normal leading-relaxed whitespace-pre-wrap pt-0.5 flex-1">
+                {comment.text}
+              </span>
+            </div>
+
+            <button
+              onClick={() => onDelete(comment.id)}
+              className="text-[11px] text-gray-400 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0 ml-6 mt-1.5"
+            >
+              삭제
+            </button>
+          </div>
+        ))}
+      </div>
     </section>
   );
 }
