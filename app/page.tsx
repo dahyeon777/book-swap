@@ -1,4 +1,3 @@
-// app/page.tsx
 "use client";
 
 import Sidebar from "@/components/Sidebar";
@@ -7,12 +6,13 @@ import { useState } from "react";
 
 export default function Home() {
   const [selectedBook, setSelectedBook] = useState<any>(null);
+
   return (
     <div className="flex h-screen">
-      {/* 사이드바에 책 선택 함수 전달 */}
-      <Sidebar onSelectBook={setSelectedBook} />
+      {/* 함수 이름을 Sidebar 내부 props와 맞췄습니다. */}
+      <Sidebar onSelectBookForMain={setSelectedBook} />
 
-      {/* 메인 영역에 선택된 책 데이터 전달 */}
+      {/* 메인 영역 */}
       <BookDetail book={selectedBook} />
     </div>
   );
