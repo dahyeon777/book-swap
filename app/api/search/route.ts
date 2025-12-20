@@ -41,7 +41,7 @@ export async function GET(request: Request) {
     const data = await res.json();
     return NextResponse.json(data);
   } catch (error) {
-    console.error("카카오 호출 중 진짜 에러:", error);
+    console.error("카카오 호출 중 에러:", error);
     return NextResponse.json({ error: "카카오 연결 실패" }, { status: 500 });
   }
 }
