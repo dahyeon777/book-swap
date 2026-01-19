@@ -3,6 +3,10 @@
 
 [서비스 바로가기](https://book-swap-livid.vercel.app/)
 
+
+![Image](https://github.com/user-attachments/assets/0fff60aa-4348-4e07-a854-be063aabec01)
+
+
 ---
 
 ## 🚀 핵심 기술 구현 (Key Technical Features)
